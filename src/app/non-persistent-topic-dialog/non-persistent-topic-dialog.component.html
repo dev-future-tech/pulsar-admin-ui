@@ -1,0 +1,17 @@
+<mat-dialog-content class="mat-typography">
+
+    <mat-form-field>
+        <mat-label>Topic Name</mat-label>
+        <input matInput [(ngModel)]="data.name">
+    </mat-form-field>
+<br>
+    <mat-form-field>
+        <mat-label>Retention Timeout (seconds)</mat-label>
+        <input matInput [(ngModel)]="data.timeout">
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Create</button>
+</mat-dialog-actions>

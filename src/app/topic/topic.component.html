@@ -1,0 +1,18 @@
+<p>topic works!</p>
+<button mat-raised-button (click)="openPersistentDialog()">Create Persistent Topic</button><br>
+<button mat-raised-button (click)="openNonPersistentDialog()">Create Non-Persistent Topic</button>
+<br>
+<table mat-table [dataSource]="topicDataSource">
+    <ng-container matColumnDef="topicName">
+        <th mat-header-cell *matHeaderCellDef>Topic</th>
+        <td mat-cell *matCellDef="let topic">{{topic}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let topic">Manage</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnNames; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnNames;"></tr>
+</table>
