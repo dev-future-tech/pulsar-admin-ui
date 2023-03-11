@@ -9,9 +9,18 @@
         <mat-label>Retention Timeout (seconds)</mat-label>
         <input matInput [(ngModel)]="data.timeout">
     </mat-form-field>
-
+<br>
+    <mat-checkbox class="example-margin"
+    [(ngModel)]="withSchema"
+    (change)="showEditor($event.checked)">
+    Add Schema
+    </mat-checkbox>
+    <div *ngIf="withSchema">
+        <app-avro-schema namespace="public/test-namespace" topic="my-topic"></app-avro-schema>
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Create</button>
 </mat-dialog-actions>
+

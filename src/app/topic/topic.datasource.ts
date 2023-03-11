@@ -18,30 +18,7 @@ export class TopicDataSource extends DataSource<string> {
     }
 
     loadTopics(namespace: string): void {
-        this.service.loadTopicsForNamespace(namespace, false).pipe(
-            switchMap(topic => {
-                console.log(`Returning ${topic}`);
-                return topic;
-            }),
-            mergeMap(topic => {
-                var re = /persistent:\/\//gi;
-                var topicStr = topic.replace(re, '');
-                var sections = topicStr.split('/');
-                var topicName = sections[sections.length-1];
-                console.log(`Getting details for topic ${topicName}...`);
-                return this.service.getTopicProperties(namespace, topicName).pipe(
-                    map(props => {
-                        let toTest = topic.concat(`props: ${JSON.stringify(props)}`);
-                        console.log(`toTest: ${toTest}`);
-                        return [];
-                    })
-                );
-            }),
-            map(value => {
-                console.log(value);
-                return value;
-            })
-        )
+        this.service.loadTopicsForNamespace(namespace, false)
         .subscribe({
             next: (topics) => this.topic$.next(topics)
         });

@@ -1,6 +1,6 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 
 @Injectable({
@@ -22,17 +22,18 @@ export class SchemaService {
     console.log(`RequestBody: ${JSON.stringify(body)}`);
 
     return this.http.post<boolean>(uri, body, {reportProgress: true, observe: "events"}).pipe(
-      tap(event => {
+      map(event => {
         if (event.type === HttpEventType.DownloadProgress) {
-          console.log("download progress");
+          console.log(`download progress: ${event.total}`);
+          return false;
         }
         if (event.type === HttpEventType.Response) {
-          console.log("donwload completed");
+          console.log(`download completed: ${JSON.stringify(event.body)}`);
+          return true;
         }
-      }),
-      map(value => {
         return false;
-      })
+      }),
+      catchError(error => of(false))
     )
   }
 }

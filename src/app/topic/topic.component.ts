@@ -27,7 +27,12 @@ export class TopicComponent implements OnInit {
 
 
   openPersistentDialog(): void {
-    const dialogRef = this.dialog.open(NonPersistentTopicDialogComponent, {data: { name: '', timeout: 60 }});
+    const dialogRef = this.dialog.open(NonPersistentTopicDialogComponent,
+      {
+          height: '400px',
+          width: '550px',
+          data: { name: '', timeout: 60 }
+      });
 
     dialogRef.afterClosed().subscribe({
       next: (value) => {

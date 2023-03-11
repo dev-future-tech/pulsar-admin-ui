@@ -7,7 +7,13 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./non-persistent-topic-dialog.component.css']
 })
 export class NonPersistentTopicDialogComponent {
+  withSchema = false;
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {name: string, timeout: number }) {}
   
+  showEditor(checked: boolean) : void {
+
+  }
+
 }
